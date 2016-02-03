@@ -1,0 +1,9 @@
+*.seed
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+
+.DS_Store
+.env
