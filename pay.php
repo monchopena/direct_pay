@@ -15,32 +15,31 @@ Author URI: https://codigo.co.uk
 */
 
 /*
-	TODO: todas las funciones getText __ cambiar a
-	De __( 'PAGOS' )
-	A __( 'Pays', 'redsys_direct_pay' )
-	y crear archivo de traducciones
+	Translations
 */
 
-
-
+add_action('plugins_loaded', 'wan_load_textdomain');
+function wan_load_textdomain() {
+	load_plugin_textdomain( 'redsys_direct_pay', false, dirname( plugin_basename(__FILE__) ) . '/lang/' );
+}
 
 function custom_entries() {
   register_post_type( 'payment',
     array(
       'labels' => array(
-        'name'                => __( 'PAGOS' ),
-        'singular_name'       => __( 'PAGO' ),
-        'menu_name'           => __( 'PAGOS' ),
-        'parent_item_colon'   => __( 'PAGO padre:' ),
-        'all_items'           => __( 'Todos los Pagos' ),
-        'view_item'           => __( 'Ver pago' ),
-        'add_new_item'        => __( 'Añadir nuevo Pago' ),
-        'add_new'             => __( 'Nuevo Pago' ),
-        'edit_item'           => __( 'Editar Pago' ),
-        'update_item'         => __( 'Actualizar Pago' ),
-        'search_items'        => __( 'Buscar Pagos' ),
-        'not_found'           => __( 'No se han encontrado pagos' ),
-        'not_found_in_trash'  => __( 'No hay pagos en la papelera' )
+        'name'                => __( 'Pays', 'redsys_direct_pay'),
+        'singular_name'       => __( 'PAGO', 'redsys_direct_pay' ),
+        'menu_name'           => __( 'PAGOS', 'redsys_direct_pay' ),
+        'parent_item_colon'   => __( 'PAGO padre:', 'redsys_direct_pay' ),
+        'all_items'           => __( 'Todos los Pagos', 'redsys_direct_pay' ),
+        'view_item'           => __( 'Ver pago', 'redsys_direct_pay' ),
+        'add_new_item'        => __( 'Añadir nuevo Pago', 'redsys_direct_pay' ),
+        'add_new'             => __( 'Nuevo Pago', 'redsys_direct_pay' ),
+        'edit_item'           => __( 'Editar Pago', 'redsys_direct_pay' ),
+        'update_item'         => __( 'Actualizar Pago', 'redsys_direct_pay' ),
+        'search_items'        => __( 'Buscar Pagos', 'redsys_direct_pay' ),
+        'not_found'           => __( 'No se han encontrado pagos', 'redsys_direct_pay' ),
+        'not_found_in_trash'  => __( 'No payments in bin', 'redsys_direct_pay' )
       ),
     'publicly_queryable' => true,
     'show_ui' => true,
@@ -68,12 +67,12 @@ add_filter( 'manage_edit-pays_columns', 'my_edit_pays_columns' ) ;
 function my_edit_pays_columns( $columns ) {
 
 	$columns = array(
-		'cb'=> __( 'Seleccionar' ),
-		'title' => __( 'Title' ),
-		'email' => __( 'Email' ),
-		'importe' => __( 'Importe' ),
-        'autor' =>  __( 'Autor' ),
- 		'date' => __( 'Date' )
+		'cb'=> __( 'Seleccionar', 'redsys_direct_pay' ),
+		'title' => __( 'Title', 'redsys_direct_pay' ),
+		'email' => __( 'Email', 'redsys_direct_pay' ),
+		'importe' => __( 'Importe', 'redsys_direct_pay' ),
+        'autor' =>  __( 'Autor', 'redsys_direct_pay' ),
+ 		'date' => __( 'Date', 'redsys_direct_pay' )
 	);
 
 	return $columns;
@@ -94,7 +93,7 @@ function my_manage_pays_columns( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $email ) )
-				echo __( 'Unknown' );
+				echo __( 'Unknown', 'redsys_direct_pay' );
 
 			/* If there is a duration, append 'minutes' to the text string. */
 			else
@@ -110,7 +109,7 @@ function my_manage_pays_columns( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $importe ) )
-				echo __( 'Unknown' );
+				echo __( 'Unknown', 'redsys_direct_pay' );
 
 			/* If there is a duration, append 'minutes' to the text string. */
 			else
@@ -124,7 +123,7 @@ function my_manage_pays_columns( $column, $post_id ) {
 		
 			/* If no duration is found, output a default message. */
 			if ( empty( $post->post_author ) )
-				echo __( 'Unknown' );
+				echo __( 'Unknown', 'redsys_direct_pay' );
 
 			/* If there is a duration, append 'minutes' to the text string. */
 			else
@@ -312,47 +311,7 @@ add_shortcode('redsys_direct_pay_page_ok', 'build_redsys_direct_pay_page_ok');
 
 add_filter( 'show_admin_bar', '__return_false' );
 
-// Do Pages
 
-register_activation_hook( __FILE__, 'insert_page_ok' );
-register_activation_hook( __FILE__, 'insert_page_ko' );
-register_activation_hook( __FILE__, 'insert_page_pay' );
-
-function insert_page_ok(){
-    // Create post object
-    $page_ok = array(
-      'post_title'    => 'Pago OK',
-      'post_content'  => '[redsys_direct_pay_page_ko]',
-      'post_status'   => 'publish',
-      'post_author'   => get_current_user_id(),
-      'post_type'     => 'page',
-    );
-    // Insert the post into the database
-    wp_insert_post( $page_ok, '' );
-}
-
-function insert_page_ko(){
-    // Create post object
-    $page_ko = array(
-      'post_title'    => 'Pago KO',
-      'post_content'  => '[redsys_direct_pay_page_ko]',
-      'post_status'   => 'publish',
-      'post_author'   => get_current_user_id(),
-      'post_type'     => 'page',
-    );
-    wp_insert_post( $page_ko, '' );
-}
-function insert_page_pay(){
-    // Create post object
-    $direct_pay = array(
-      'post_title'    => 'Pago directo',
-      'post_content'  => '[redsys_direct_pay_page]',
-      'post_status'   => 'publish',
-      'post_author'   => get_current_user_id(),
-      'post_type'     => 'page',
-    );
-    wp_insert_post( $direct_pay, '' );
-}
 
 /*
 	SETTINGS Backend
@@ -491,7 +450,7 @@ function redsys_direct_select_pay_ok_render(  ) {
 	if ($temp_option_value!='') {
 		echo $temp_option_value;
 	} else {
-		echo esc_attr( __( 'Select page' ) );
+		echo esc_attr( __( 'Select page', 'redsys_direct_pay' ) );
 	}
 
 ?>
@@ -531,7 +490,7 @@ function redsys_direct_select_pay_ko_render(  ) {
 	if ($temp_option_value!='') {
 		echo $temp_option_value;
 	} else {
-		echo esc_attr( __( 'Select page' ) );
+		echo esc_attr( __( 'Select page', 'redsys_direct_pay' ) );
 	}
 	?>
 	
@@ -569,7 +528,7 @@ function redsys_direct_select_pay_page_render(  ) {
 	if ($temp_option_value!='') {
 		echo $temp_option_value;
 	} else {
-		echo esc_attr( __( 'Select page' ) );
+		echo esc_attr( __( 'Select page', 'redsys_direct_pay' ) );
 	}
 
 	?>
@@ -608,5 +567,49 @@ function redsys_direct_options_page(  ) {
 	<?php
 }
 
-?>
 
+// Do Pages
+
+register_activation_hook( __FILE__, 'insert_pages' );
+
+function insert_pages(){
+	
+	$page_ok = array(
+      'post_title'    => 'Pago OK',
+      'post_content'  => '[redsys_direct_pay_page_ok]',
+      'post_status'   => 'publish',
+      'post_author'   => get_current_user_id(),
+      'post_type'     => 'page',
+    );
+    // Insert the post into the database
+    $id_page_ok=wp_insert_post( $page_ok, '' );
+    
+    $page_ko = array(
+      'post_title'    => 'Pago KO',
+      'post_content'  => '[redsys_direct_pay_page_ko]',
+      'post_status'   => 'publish',
+      'post_author'   => get_current_user_id(),
+      'post_type'     => 'page',
+    );
+    $id_page_ko=wp_insert_post( $page_ko, '' );
+    
+    $direct_pay = array(
+      'post_title'    => 'Pago directo',
+      'post_content'  => '[redsys_direct_pay_page]',
+      'post_status'   => 'publish',
+      'post_author'   => get_current_user_id(),
+      'post_type'     => 'page',
+    );
+    $id_page_pay=wp_insert_post( $direct_pay, '' );  
+    
+    $array_of_options = array(
+    'redsys_direct_select_pay_ok' => $id_page_ok,
+    'redsys_direct_select_pay_ko' => $id_page_ko,
+    'redsys_direct_select_pay_page' => $id_page_pay
+	);
+	
+	update_option( 'redsys_direct_settings', $array_of_options );
+	
+}
+
+?>
