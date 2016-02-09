@@ -81,3 +81,7 @@ msgstr "Desconocido"
 #: ../pay.php:329
 msgid "Settings"
 msgstr "Configuración"
+
+#: ../pay.php:453
+msgid "Settings"
+msgstr "Configuración"
