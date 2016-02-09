@@ -30,7 +30,6 @@ function custom_entries() {
         'name'                => __( 'Pays', 'redsys_direct_pay'),
         'singular_name'       => __( 'Pay', 'redsys_direct_pay' ),
         'menu_name'           => __( 'Pays', 'redsys_direct_pay' ),
-        'parent_item_colon'   => __( 'PAGO padre:', 'redsys_direct_pay' ),
         'all_items'           => __( 'All pays', 'redsys_direct_pay' ),
         'view_item'           => __( 'View pay', 'redsys_direct_pay' ),
         'add_new_item'        => __( 'Add new pay', 'redsys_direct_pay' ),
@@ -339,7 +338,7 @@ function redsys_direct_settings_init(  ) {
 	);
 	add_settings_field( 
 		'redsys_direct_text_key_sha_256c', 
-		__( 'Clave SHA-256C', 'redsys_direct_pay' ), 
+		__( 'Key SHA-256C', 'redsys_direct_pay' ), 
 		'redsys_direct_text_key_sha_256c_render', 
 		'pluginPage', 
 		'redsys_direct_pluginPage_section' 
@@ -360,28 +359,28 @@ function redsys_direct_settings_init(  ) {
 	);
 	add_settings_field( 
 		'redsys_direct_text_commerce_name', 
-		__( 'Nombre del comercio', 'redsys_direct_pay' ), 
+		__( 'Commerce name', 'redsys_direct_pay' ), 
 		'redsys_direct_text_commerce_name_render', 
 		'pluginPage', 
 		'redsys_direct_pluginPage_section' 
 	);
 	add_settings_field( 
 		'redsys_direct_select_pay_ok', 
-		__( 'Página pago OK', 'redsys_direct_pay' ), 
+		__( 'OK Page', 'redsys_direct_pay' ), 
 		'redsys_direct_select_pay_ok_render', 
 		'pluginPage', 
 		'redsys_direct_pluginPage_section' 
 	);
 	add_settings_field( 
 		'redsys_direct_select_pay_ko', 
-		__( 'Página pago KO', 'redsys_direct_pay' ), 
+		__( 'KO Page', 'redsys_direct_pay' ), 
 		'redsys_direct_select_pay_ko_render', 
 		'pluginPage', 
 		'redsys_direct_pluginPage_section' 
 	);
 	add_settings_field( 
 		'redsys_direct_select_pay_page', 
-		__( 'Página de pago', 'redsys_direct_pay' ), 
+		__( 'Pay Page', 'redsys_direct_pay' ), 
 		'redsys_direct_select_pay_page_render', 
 		'pluginPage', 
 		'redsys_direct_pluginPage_section' 
