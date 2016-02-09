@@ -28,17 +28,17 @@ function custom_entries() {
     array(
       'labels' => array(
         'name'                => __( 'Pays', 'redsys_direct_pay'),
-        'singular_name'       => __( 'PAGO', 'redsys_direct_pay' ),
-        'menu_name'           => __( 'PAGOS', 'redsys_direct_pay' ),
+        'singular_name'       => __( 'Pay', 'redsys_direct_pay' ),
+        'menu_name'           => __( 'Pays', 'redsys_direct_pay' ),
         'parent_item_colon'   => __( 'PAGO padre:', 'redsys_direct_pay' ),
-        'all_items'           => __( 'Todos los Pagos', 'redsys_direct_pay' ),
-        'view_item'           => __( 'Ver pago', 'redsys_direct_pay' ),
-        'add_new_item'        => __( 'Añadir nuevo Pago', 'redsys_direct_pay' ),
-        'add_new'             => __( 'Nuevo Pago', 'redsys_direct_pay' ),
-        'edit_item'           => __( 'Editar Pago', 'redsys_direct_pay' ),
-        'update_item'         => __( 'Actualizar Pago', 'redsys_direct_pay' ),
-        'search_items'        => __( 'Buscar Pagos', 'redsys_direct_pay' ),
-        'not_found'           => __( 'No se han encontrado pagos', 'redsys_direct_pay' ),
+        'all_items'           => __( 'All pays', 'redsys_direct_pay' ),
+        'view_item'           => __( 'View pay', 'redsys_direct_pay' ),
+        'add_new_item'        => __( 'Add new pay', 'redsys_direct_pay' ),
+        'add_new'             => __( 'New Pay', 'redsys_direct_pay' ),
+        'edit_item'           => __( 'Edit pay', 'redsys_direct_pay' ),
+        'update_item'         => __( 'Update Pay', 'redsys_direct_pay' ),
+        'search_items'        => __( 'search Pay', 'redsys_direct_pay' ),
+        'not_found'           => __( 'Not found pays', 'redsys_direct_pay' ),
         'not_found_in_trash'  => __( 'No payments in bin', 'redsys_direct_pay' )
       ),
     'publicly_queryable' => true,
@@ -67,11 +67,11 @@ add_filter( 'manage_edit-pays_columns', 'my_edit_pays_columns' ) ;
 function my_edit_pays_columns( $columns ) {
 
 	$columns = array(
-		'cb'=> __( 'Seleccionar', 'redsys_direct_pay' ),
+		'cb'=> __( 'Select', 'redsys_direct_pay' ),
 		'title' => __( 'Title', 'redsys_direct_pay' ),
 		'email' => __( 'Email', 'redsys_direct_pay' ),
-		'importe' => __( 'Importe', 'redsys_direct_pay' ),
-        'autor' =>  __( 'Autor', 'redsys_direct_pay' ),
+		'importe' => __( 'Amount', 'redsys_direct_pay' ),
+        'autor' =>  __( 'Author', 'redsys_direct_pay' ),
  		'date' => __( 'Date', 'redsys_direct_pay' )
 	);
 
