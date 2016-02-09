@@ -18,8 +18,56 @@ msgstr ""
 msgid "Pays"
 msgstr "Pagos"
 
+#: ../pay.php:31
+msgid "Pay"
+msgstr "Pago"
+
+#: ../pay.php:34
+msgid "All pays"
+msgstr "Todos los pagos"
+
+#: ../pay.php:35
+msgid "View pay"
+msgstr "Ver pagos"
+
+#: ../pay.php:36
+msgid "Add new pay"
+msgstr "Añadir nuevo pago"
+
+#: ../pay.php:37
+msgid "New Pay"
+msgstr "Nuevo pago"
+
+#: ../pay.php:38
+msgid "Edit pay"
+msgstr "Editar Pago"
+
+#: ../pay.php:39
+msgid "Update Pay"
+msgstr "Actualizar pago"
+
+#: ../pay.php:40
+msgid "Search Pay"
+msgstr "Buscar pagos"
+
+#: ../pay.php:41
+msgid "Not found pays"
+msgstr "No se han encontrado pagos"
+
 #: ../pay.php:42
 msgid "No payments in bin"
 msgstr "No hay pagos en la papelera"
+
+#: ../pay.php:70
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../pay.php:73
+msgid "Amount"
+msgstr "Importe"
+
+#: ../pay.php:74
+msgid "Author"
+msgstr "Autor"
 
 
