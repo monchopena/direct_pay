@@ -22,6 +22,10 @@ msgstr "Pagos"
 msgid "Pay"
 msgstr "Pago"
 
+#: ../pay.php:33
+msgid "Parent pay:"
+msgstr "Pago padre:"
+
 #: ../pay.php:34
 msgid "All pays"
 msgstr "Todos los pagos"
@@ -81,6 +85,26 @@ msgstr "Desconocido"
 #: ../pay.php:329
 msgid "Settings"
 msgstr "Configuración"
+
+#: ../pay.php:341
+msgid "Key SHA-256C"
+msgstr "Clave SHA-256C"
+
+#: ../pay.php:362
+msgid "Commerce name"
+msgstr "Nombre del comercio"
+
+#: ../pay.php:369
+msgid "OK Page"
+msgstr "Página OK"
+
+#: ../pay.php:376
+msgid "KO Page"
+msgstr "Página KO"
+
+#: ../pay.php:383
+msgid "Pay Page"
+msgstr "Página Pago"
 
 #: ../pay.php:453
 msgid "Settings"
