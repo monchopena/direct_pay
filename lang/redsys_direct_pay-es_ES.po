@@ -70,4 +70,14 @@ msgstr "Importe"
 msgid "Author"
 msgstr "Autor"
 
+#: ../pay.php:75
+msgid "Date"
+msgstr "Fecha"
 
+#: ../pay.php:96 ../pay.php:112 ../pay.php:126 
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: ../pay.php:329
+msgid "Settings"
+msgstr "Configuración"
