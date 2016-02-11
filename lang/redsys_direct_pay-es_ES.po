@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: RedSys Direct Pay 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-27 13:09+0100\n"
-"PO-Revision-Date: 2016-02-27 13:09+0100\n"
+"PO-Revision-Date: 2016-02-11 10:38+0100\n"
 "Last-Translator: Roi Facal <roi@myadomain.com>\n"
 "Language-Team: Moncho Pena <moncho@mydomain.com>\n"
 "Language: Spanish\n"
@@ -12,6 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../pay.php:30
@@ -78,11 +79,11 @@ msgstr "Autor"
 msgid "Date"
 msgstr "Fecha"
 
-#: ../pay.php:96 ../pay.php:112 ../pay.php:126 
+#: ../pay.php:96 ../pay.php:112 ../pay.php:126
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../pay.php:329
+#: ../pay.php:329 ../pay.php:453
 msgid "Settings"
 msgstr "Configuración"
 
@@ -105,7 +106,3 @@ msgstr "Página KO"
 #: ../pay.php:383
 msgid "Pay Page"
 msgstr "Página Pago"
-
-#: ../pay.php:453
-msgid "Settings"
-msgstr "Configuración"
