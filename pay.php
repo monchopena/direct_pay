@@ -61,34 +61,34 @@ add_action( 'init', 'custom_entries' );
 	SHOW in Backend
 */
 
-add_filter( 'manage_edit-pays_columns', 'my_edit_pays_columns' ) ;
+add_filter( 'manage_edit-payment_columns', 'my_edit_payment_columns' ) ;
 
-function my_edit_pays_columns( $columns ) {
+function my_edit_payment_columns( $columns ) {
 
 	$columns = array(
 		'cb'=> __( 'Select', 'redsys_direct_pay' ),
 		'title' => __( 'Title', 'redsys_direct_pay' ),
 		'email' => __( 'Email', 'redsys_direct_pay' ),
-		'importe' => __( 'Amount', 'redsys_direct_pay' ),
-        'autor' =>  __( 'Author', 'redsys_direct_pay' ),
+		'import' => __( 'Amount', 'redsys_direct_pay' ),
+        'author' =>  __( 'Author', 'redsys_direct_pay' ),
+        'signature' =>  __( 'Signature', 'redsys_direct_pay' ),
  		'date' => __( 'Date', 'redsys_direct_pay' )
 	);
 
 	return $columns;
 }
 
-add_action( 'manage_pays_posts_custom_column', 'my_manage_pays_columns', 10, 2 );
+add_action( 'manage_payment_posts_custom_column', 'my_manage_payment_columns', 10, 2 );
 
-function my_manage_pays_columns( $column, $post_id ) {
+function my_manage_payment_columns( $column, $post_id ) {
 	global $post;
 
 	switch( $column ) {
 
-		/* If displaying the 'duration' column. */
 		case 'email' :
 
 			/* Get the post meta. */
-			$email = get_post_meta( $post_id, 'author_email_info', true );
+			$email = get_post_meta( $post_id, 'redsys_direct_email', true );
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $email ) )
@@ -100,23 +100,39 @@ function my_manage_pays_columns( $column, $post_id ) {
 
 			break;
 
-		/* If displaying the 'genre' column. */
-		case 'importe' :
+		case 'import' :
 
 			/* Get the post meta. */
-			$importe = get_post_meta( $post_id, 'author_importe_info', true );
+			
+			$import = get_post_meta( $post_id, 'redsys_direct_import', true );
 
 			/* If no duration is found, output a default message. */
-			if ( empty( $importe ) )
+			if ( empty( $import) )
 				echo __( 'Unknown', 'redsys_direct_pay' );
 
 			/* If there is a duration, append 'minutes' to the text string. */
 			else
-				echo $importe;
+				echo $import;
 
 			break;
+			
+		case 'signature':
+		
+			/* Get the post meta. */
+			$signature = get_post_meta( $post_id, 'redsys_direct_signature', true );
 
-		case 'autor' :
+			/* If no duration is found, output a default message. */
+			if ( empty( $signature ) )
+				echo __( 'Unknown', 'redsys_direct_pay' );
+
+			/* If there is a duration, append 'minutes' to the text string. */
+			else
+				echo $signature;
+
+			break;
+		
+
+		case 'author' :
 
 			/* Get the post meta. */
 		
@@ -173,22 +189,38 @@ function build_redsys_direct_pay_page() {
  		/*
 	 		BEGIN shortcode redsys_direct_pay_page
 	 	*/
+	 	
+	 	 $url = plugins_url() . '/redsys_direct_pay/pay_ajax.php';
+	 	 
+	 	 $test_mode=1;
+	 	 
+	 	 $post_name='';
+	 	 $submitters_email='';
+	 	 $comentarios='';
+	 	 $Ds_Merchant_Amount='';
+	 	 
+	 	 if ($test_mode==0) {
+		 	 $post_name='Xoan Rodriguez';
+		 	 $submitters_email='xoan@rodriguez.com';
+		 	 $comentarios='No comments';
+		 	 $Ds_Merchant_Amount=221;
+	 	 }
+	 	 
+	 	 
 	?>  
-
-       
       
 		<form id="formulariopago" name="frm" action="<?php echo $tpvurl; ?>" method="POST">
 
-			<input class="required" type="text" id="thepost_name" name="post_name" size="75" value="<?php strip_tags(stripslashes($_POST['post_name'])) ?>" placeholder="Name" /></br>
-			<input class="required" type="text" id="thesubmitters_email" name="submitters_email" size="75" value="<?php strip_tags(stripslashes($_POST['submitters_email'])) ?>" placeholder="Email" /></br>
+			<input class="required" type="text" id="thepost_name" name="post_name" size="75" value="<?php echo strip_tags(stripslashes($post_name)) ?>" placeholder="Name" /></br>
+			<input class="required" type="text" id="thesubmitters_email" name="submitters_email" size="75" value="<?php echo strip_tags(stripslashes($submitters_email)) ?>" placeholder="Email" /></br>
 			
-			<textarea class="required" id="comentario" name="comentarios"rows="4" cols="50" placeholder="Coments" value="<?php $comentarios ?>" ></textarea></br>
+			<textarea class="required" id="comentario" name="comentarios"rows="4" cols="50" placeholder="Coments"><?php echo strip_tags(stripslashes($comentarios)) ?></textarea></br>
 			<input type="hidden" name="Ds_SignatureVersion" value="<?php echo $version; ?>"/>
 			<input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value=""/>
 			<input type="hidden" id="Ds_Signature" name="Ds_Signature" value=""/>
-			<input class="required" type="text" id="Ds_Merchant_Amount" name="Ds_Merchant_Amount" value="" placeholder="Import" /></br>
+			<input class="required" type="text" id="Ds_Merchant_Amount" name="Ds_Merchant_Amount" value="<?php echo strip_tags(stripslashes($Ds_Merchant_Amount)) ?>" placeholder="Import" /></br>
 
-			<button style="float:left;" class="btn btn-primary" type="button" onclick="javascript:doFormFinal()" /> Send</button>
+			<button style="float:left;" class="btn btn-primary" type="button" onclick="javascript:doFormFinal('<?echo $url ?>')" /> Send</button>
 
 		</form>
 
@@ -551,6 +583,9 @@ function redsys_direct_settings_section_callback(  ) {
 	echo __( 'Plugin de Pago Directo para Redsys', 'redsys_direct_pay' );
 }
 function redsys_direct_options_page(  ) { 
+	$options = get_option( 'redsys_direct_settings' );
+	$url_pay = get_permalink($options['redsys_direct_select_pay_page']);
+	
 	?>
 	<form action='options.php' method='post'>
 		
@@ -563,6 +598,16 @@ function redsys_direct_options_page(  ) {
 		?>
 		
 	</form>
+	
+	<?php
+		if ($url_pay!='') {	
+	?>
+		<p><a href="<?echo $url_pay;?>">Go to Pay page</a></p>
+	
+	<?php
+		}	
+	?>
+	
 	<?php
 }
 

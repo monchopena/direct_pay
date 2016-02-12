@@ -43,13 +43,32 @@ if ($debug_mode==1) {
 	openlog('pay-me-log', 0, LOG_LOCAL0);
 }
 
-
-
 //init array
+if ($debug_mode==1) {
+	$result=array(
+				'idPOST' => 0,
+				'signature' => '',
+				'params' => '',
+				'kc' => '',
+				'fuc' => '',
+				'DS_MERCHANT_AMOUNT' => 0,
+				'DS_MERCHANT_ORDER' => 0,
+				'DS_MERCHANT_MERCHANTCODE' => '',
+				'DS_MERCHANT_CURRENCY' => '',
+				'DS_MERCHANT_TRANSACTIONTYPE' => '',
+				'DS_MERCHANT_TERMINAL' => '',
+				'DS_MERCHANT_MERCHANTURL' => '',
+				'DS_MERCHANT_URLOK' => '',
+				'DS_MERCHANT_URLKO' =>''
+			 );
+} else {
+
 $result=array(
 				'idPOST' => 0,
-				'signature' => ''
+				'signature' => '',
+				'params' => ''
 			 );
+}
 
 //
 doDebug($debug_mode, '$_POST[\'post_name\']: ' . $_POST['post_name']);
@@ -96,8 +115,8 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 
 	if ( $wp_post_id > 0) {
 	      // Add our custom fields	   
-	      add_post_meta($wp_post_id, 'email', strip_tags(stripslashes($invitado_email)));
-	      add_post_meta($wp_post_id, 'importe', strip_tags(stripslashes($newImporte)));
+	      add_post_meta($wp_post_id, 'redsys_direct_email', strip_tags(stripslashes($invitado_email)));
+	      add_post_meta($wp_post_id, 'redsys_direct_import', strip_tags(stripslashes($newImporte)));
 	}
 	
 		
@@ -132,10 +151,11 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 	$urlKO = get_permalink($options['redsys_direct_select_pay_ko']);
     
   
+	$my_order=strval($wp_post_id)+1000;
 	
 	// Se Rellenan los campos
 	$miObj->setParameter("DS_MERCHANT_AMOUNT",$Importe); //EL IMPORTE
-	$miObj->setParameter("DS_MERCHANT_ORDER",strval($wp_post_id)+1000);
+	$miObj->setParameter("DS_MERCHANT_ORDER", $my_order);
 	$miObj->setParameter("DS_MERCHANT_MERCHANTCODE",$fuc);
 	$miObj->setParameter("DS_MERCHANT_CURRENCY",$moneda);
 	$miObj->setParameter("DS_MERCHANT_TRANSACTIONTYPE",$trans);
@@ -154,15 +174,38 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 	
 	doDebug($debug_mode, '$signature: ' . $signature);
 	
-	$result=array(
-				'idPOST' => $wp_post_id,
-				'signature' => $signature,
-				'params' => $params
-			 );
-			 
+	
+	if ($debug_mode==1) {
+		$result=array(
+					'idPOST' => $wp_post_id,
+					'signature' => $signature,
+					'params' => $params, 
+					'kc' => $kc,
+					'fuc' => $fuc,
+ 					'DS_MERCHANT_AMOUNT' => $Importe,
+					'DS_MERCHANT_ORDER' => $my_order,
+					'DS_MERCHANT_MERCHANTCODE' => $fuc,
+					'DS_MERCHANT_CURRENCY' => $moneda,
+					'DS_MERCHANT_TRANSACTIONTYPE' => $trans,
+					'DS_MERCHANT_TERMINAL' => $terminal,
+					'DS_MERCHANT_MERCHANTURL' => $url,
+					'DS_MERCHANT_URLOK' => $urlOK,
+					'DS_MERCHANT_URLKO' => $urlKO
+				 );
+	} else {
+	
+		
+		$result=array(
+					'idPOST' => $wp_post_id,
+					'signature' => $signature,
+					'params' => $params
+	
+				 );
+	
+	}			 
 	if ( $wp_post_id > 0) {
 	      // Add our custom fields	   
-	      add_post_meta($wp_post_id, 'wpcf-signature', strip_tags(stripslashes($signature)));
+	      add_post_meta($wp_post_id, 'redsys_direct_signature', strip_tags(stripslashes($signature)));
 	}
 	
 	 

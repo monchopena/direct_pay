@@ -1,7 +1,5 @@
-function doFormFinal() {
-					
+function doFormFinal(url) {
 
-	var url='/wp-content/plugins/redsys_direct_pay/pay_ajax.php';
 	var postname = jQuery('input#thepost_name').val();
 	var submitters_email = jQuery('input#thesubmitters_email').val();
 	var amount = jQuery('input#importe').val();  
@@ -49,10 +47,12 @@ function doFormFinal() {
 								    dataType: 'json',
 								    success: function( data ) {
 										//$( &quot;#result&quot; ).empty().append( data );
+										
+										//alert(JSON.stringify(data));
+										
 										var idPOST=data['idPOST'];  
 										var signature=data['signature'];
 										var params=data['params'];
-										//console.log('signature: '+signature);
 										//alert('idPOST: ' + idPOST + ' - signature: ' +  signature + ' params: ' + params);
 										//here signature
 										jQuery('#Ds_MerchantParameters').val(params);
