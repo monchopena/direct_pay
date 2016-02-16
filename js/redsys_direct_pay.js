@@ -37,30 +37,23 @@ function doFormFinal(url) {
 	//console.log('isvalidate: '+isvalidate);
 	
 	if (isvalidate===true) {
-		
-
-		
 		var posting = jQuery.ajax({
-								    type: 'POST',
-								    url: url,
-								    data: jQuery( '#formulariopago' ).serialize(),
-								    dataType: 'json',
-								    success: function( data ) {
-										//$( &quot;#result&quot; ).empty().append( data );
-										
-										//alert(JSON.stringify(data));
-										
-										var idPOST=data['idPOST'];  
-										var signature=data['signature'];
-										var params=data['params'];
-										//alert('idPOST: ' + idPOST + ' - signature: ' +  signature + ' params: ' + params);
-										//here signature
-										jQuery('#Ds_MerchantParameters').val(params);
-										jQuery('#Ds_Signature').val(signature);
-										//let's go!
-										jQuery('#formulariopago').submit();
-									}								     
-								  });
+		    type: 'POST',
+		    url: url,
+		    data: jQuery( '#formulariopago' ).serialize(),
+		    dataType: 'json',
+		    success: function( data ) {		
+				var idPOST=data['idPOST'];  
+				var signature=data['signature'];
+				var params=data['params'];
+				//alert('idPOST: ' + idPOST + ' - signature: ' +  signature + ' params: ' + params);
+				//here signature
+				jQuery('#Ds_MerchantParameters').val(params);
+				jQuery('#Ds_Signature').val(signature);
+				//let's go!
+				jQuery('#formulariopago').submit();
+			}								     
+	  	});
 	}
 	
 }

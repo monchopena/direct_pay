@@ -169,6 +169,7 @@ add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
 
 function build_redsys_direct_pay_page() {
 		
+	   ob_start();
 
 	   $version="HMAC_SHA256_V1";
 	   
@@ -227,6 +228,10 @@ function build_redsys_direct_pay_page() {
 	
 	<?php	
 		
+		$out = ob_get_clean();
+		return $out;
+
+		
 }		
 
 add_shortcode('redsys_direct_pay_page', 'build_redsys_direct_pay_page');
@@ -236,6 +241,8 @@ function build_redsys_direct_pay_page_ko() {
  		/*
 	 		BEGIN shortcode redsys_direct_pay_page_ko
 	 	*/
+	 	
+	 	ob_start();
 	 	
 	 	$options = get_option( 'redsys_direct_settings' );
 	 	
@@ -278,6 +285,9 @@ function build_redsys_direct_pay_page_ko() {
 	
 	<?php	
 		
+		$out = ob_get_clean();
+		return $out;
+		
 }		
 
 add_shortcode('redsys_direct_pay_page_ko', 'build_redsys_direct_pay_page_ko');
@@ -288,6 +298,8 @@ function build_redsys_direct_pay_page_ok() {
  		/*
 	 		BEGIN shortcode redsys_direct_pay_page_ko
 	 	*/
+	 	
+	 	ob_start();
 	 	
 	 	$options = get_option( 'redsys_direct_settings' );
 	 	
@@ -329,6 +341,9 @@ function build_redsys_direct_pay_page_ok() {
 
 	
 	<?php	
+		
+		$out = ob_get_clean();
+		return $out;
 		
 }		
 
