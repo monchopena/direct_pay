@@ -350,15 +350,6 @@ function build_redsys_direct_pay_page_ok() {
 add_shortcode('redsys_direct_pay_page_ok', 'build_redsys_direct_pay_page_ok');
 
 
-/*  
-	TODO: ¿Esto es necesario?
-	Quitar barra de admin
-*/
-
-add_filter( 'show_admin_bar', '__return_false' );
-
-
-
 /*
 	SETTINGS Backend
 */
@@ -481,10 +472,6 @@ function redsys_direct_select_pay_ok_render(  ) {
 
 <?php
 
-/*
-	TODO: en estas funciones se tendría que sacar fuera pages, es decir siempre son las mismas
-	también habría que pensar en sacar la variable $options.
-*/
 	
 ?>
 
@@ -603,7 +590,7 @@ function redsys_direct_options_page(  ) {
 	
 	?>
 	<form action='options.php' method='post'>
-		
+	<img src="<?php echo $url = plugin_dir_url( $file ); ?>redsys_direct_pay/imgpsh_fullsize_2.jpg">	
 		<h2>Redsys Pago Directo</h2>
 		
 		<?php
