@@ -157,8 +157,8 @@ function my_manage_payment_columns( $column, $post_id ) {
 */
 
 function my_scripts_method() {
-    wp_enqueue_script( 'jquery_validate', plugins_url( '/js/jquery.validate.min.js' , __FILE__ ), array(  ) );
-    wp_enqueue_script( 'direct_pay', plugins_url( '/js/direct_pay.js' , __FILE__ ), array( ) );
+    wp_enqueue_script( 'jquery_validate', plugins_url( '/js/jquery.validate.min.js' , __FILE__ ), array( 'jquery' ) );
+    wp_enqueue_script( 'direct_pay', plugins_url( '/js/direct_pay.js' , __FILE__ ), array( 'jquery') );
 }
 
 add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
@@ -193,7 +193,7 @@ function build_direct_pay_page() {
 	 	
 	 	 $url = plugins_url() . '/direct_pay/pay_ajax.php';
 	 	 
-	 	 $test_mode=1;
+	 	 $test_mode=0;
 	 	 
 	 	 $post_name='';
 	 	 $submitters_email='';
