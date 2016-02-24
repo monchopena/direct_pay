@@ -191,7 +191,7 @@ function build_redsys_direct_pay_page() {
 	 		BEGIN shortcode redsys_direct_pay_page
 	 	*/
 	 	
-	 	 $url = plugins_url() . '/redsys_direct_pay/pay_ajax.php';
+	 	 $url = plugins_url() . '/direct_pay/pay_ajax.php';
 	 	 
 	 	 $test_mode=1;
 	 	 
@@ -590,8 +590,7 @@ function redsys_direct_options_page(  ) {
 	
 	?>
 	<form action='options.php' method='post'>
-	<img src="<?php echo $url = plugin_dir_url( $file ); ?>redsys_direct_pay/imgpsh_fullsize_2.jpg">	
-		<h2>Redsys Pago Directo</h2>
+		<h2>Pago Directo</h2>
 		
 		<?php
 		settings_fields( 'pluginPage' );
