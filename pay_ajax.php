@@ -13,17 +13,17 @@ include_once('../../../wp-includes/post.php');
 require_once ('apiRedsys.php');
 
 
-$options = get_option( 'redsys_direct_settings' );
+$options = get_option( 'direct_pay_settings' );
 
 /*
-$options['redsys_direct_select_environment'];
-$options['redsys_direct_text_key_sha_256c'];
-$options['redsys_direct_text_commerce_fuc'];
-$options['redsys_direct_text_terminal'];
-$options['redsys_direct_text_commerce_name'];
-$options['redsys_direct_select_pay_ok'];
-$options['redsys_direct_select_pay_ko'];
-$options['redsys_direct_select_pay_page'];
+$options['direct_pay_select_environment'];
+$options['direct_pay_text_key_sha_256c'];
+$options['direct_pay_text_commerce_fuc'];
+$options['direct_pay_text_terminal'];
+$options['direct_pay_text_commerce_name'];
+$options['direct_pay_select_pay_ok'];
+$options['direct_pay_select_pay_ko'];
+$options['direct_pay_select_pay_page'];
 */
 
 //only for tests
@@ -115,17 +115,17 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 
 	if ( $wp_post_id > 0) {
 	      // Add our custom fields	   
-	      add_post_meta($wp_post_id, 'redsys_direct_email', strip_tags(stripslashes($invitado_email)));
-	      add_post_meta($wp_post_id, 'redsys_direct_import', strip_tags(stripslashes($newImporte)));
+	      add_post_meta($wp_post_id, 'direct_pay_email', strip_tags(stripslashes($invitado_email)));
+	      add_post_meta($wp_post_id, 'direct_pay_import', strip_tags(stripslashes($newImporte)));
 	}
 	
 		
 	$miObj = new RedsysAPI;
 	
 	// Valores de entrada
-	$fuc=$options['redsys_direct_text_commerce_fuc'];
+	$fuc=$options['direct_pay_text_commerce_fuc'];
 	//$fuc="qwertyasdf0123456789";
-	$terminal=$options['redsys_direct_text_terminal'];
+	$terminal=$options['direct_pay_text_terminal'];
 	$moneda="978";
 	//$moneda="000";
 	$trans="0";
@@ -147,8 +147,8 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 		
 	*/
 
-	$urlOK = get_permalink($options['redsys_direct_select_pay_ok']);
-	$urlKO = get_permalink($options['redsys_direct_select_pay_ko']);
+	$urlOK = get_permalink($options['direct_pay_select_pay_ok']);
+	$urlKO = get_permalink($options['direct_pay_select_pay_ko']);
     
   
 	$my_order=strval($wp_post_id)+1000;
@@ -167,7 +167,7 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 	//Datos de configuración
 	$version="HMAC_SHA256_V1";
 		
-	$kc = $options['redsys_direct_text_key_sha_256c'];
+	$kc = $options['direct_pay_text_key_sha_256c'];
 	$request = "";
 	$params = $miObj->createMerchantParameters();
 	$signature = $miObj->createMerchantSignature($kc);	
@@ -205,7 +205,7 @@ if (isset($_POST['post_name']) && $_POST['post_name']!='' &&
 	}			 
 	if ( $wp_post_id > 0) {
 	      // Add our custom fields	   
-	      add_post_meta($wp_post_id, 'redsys_direct_signature', strip_tags(stripslashes($signature)));
+	      add_post_meta($wp_post_id, 'direct_pay_signature', strip_tags(stripslashes($signature)));
 	}
 	
 	 
